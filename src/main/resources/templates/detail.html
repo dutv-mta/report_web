@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
+
+    <title>Detail Report</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="application/x-font-ttf" th:href="@{/fonts/fontawesome-webfont.ttf}"/>
+    <link rel="stylesheet" type="application/font-woff" th:href="@{/fonts/fontawesome-webfont.woff}"/>
+    <!-- NProgress -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nprogress.css}"/>
+    <!-- iCheck -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/green.css}"/>
+
+    <!-- bootstrap-progressbar -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}"/>
+    <!-- JQVMap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jqvmap.min.css}"/>
+    <!-- bootstrap-daterangepicker -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}"/>
+
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.min.css}"/>
+    <!-- Main -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+
+<body class="nav-md">
+<input id="report-topic-id" th:value="${topicId}" type="hidden">
+<div id="auth-before-load" style="text-align:center">
+    <img width="50px" th:src="@{/images/loading.gif}">
+    <div>Now Loading</div>
+</div>
+<div id="auth-after-load" class="container body">
+    <div class="main_container">
+        <!-- header -->
+        <div th:replace="header::header(topicList=${topicList})"></div>
+        <!-- /header -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="dashboard_graph">
+                            <div class="row x_title">
+                                <div class="col-md-9">
+                                    <h3>Chi tiết
+                                        <small></small>
+                                    </h3>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                    <fieldset>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="col-md-11 xdisplay_inputx form-group row has-feedback">
+                                                    <input type="text" class="form-control has-feedback-left"
+                                                           id="report-select-date" placeholder="First Name"
+                                                           aria-describedby="inputSuccess2Status3">
+                                                    <span class="fa fa-calendar-o form-control-feedback left"
+                                                          aria-hidden="true"></span>
+                                                    <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <!-- Danh sách bài viết-->
+                            <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                                <div class="x_title">
+                                    <h2>Danh sách bài viết</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-6">
+                                    <div class="report-facebook-scroll" id="report-list-post">
+                                        <ul class="list-unstyled timeline widget">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Danh sách bài viết -->
+                            <!-- Chi tiết -->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div class="x_title">
+                                    <h2><strong><i>Chi tiết bài viết</i></strong></h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="demo-placeholder report-facebook-scroll" id="detail-post">
+
+                                </div>
+                            </div>
+                            <!-- /Chi tiết-->
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <div th:replace="footer::footer"></div>
+        <!-- /footer content -->
+    </div>
+</div>
+<script id="item-template-post" type="text/x-custom-template">
+    <li data-id="{{id}}">
+        <div class="block">
+            <div class="block_content">
+                <h2 class="title">
+                    <a class="read-more">{{title}}</a>
+                </h2>
+                <div class="byline">
+                    <span>{{date}}</span>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+<script id="detail-template-post" type="text/x-custom-template">
+    <div>
+        <h2><strong><i>{{title}}</i></strong></h2>
+        <p>{{url}}</p>
+        <p>{{pubTime}}</p>
+        <div>{{content}}</div>
+    </div>
+</script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/js/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/js/nprogress.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/js/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/js/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/js/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/js/skycons.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/daterangepicker.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.js}"></script>
+<!-- Report datail -->
+<script th:src="@{/js/report.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $(".show-user-name").append([[${username}]]);
+    })
+</script>
+</body>
+</html>

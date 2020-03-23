@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
+
+    <title>Overview Report</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="application/x-font-ttf" th:href="@{/fonts/fontawesome-webfont.ttf}"/>
+    <link rel="stylesheet" type="application/font-woff" th:href="@{/fonts/fontawesome-webfont.woff}"/>
+    <!-- NProgress -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nprogress.css}"/>
+    <!-- iCheck -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/green.css}"/>
+
+    <!-- bootstrap-progressbar -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}"/>
+    <!-- JQVMap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jqvmap.min.css}"/>
+    <!-- bootstrap-daterangepicker -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}"/>
+    <!-- High charts -->
+    <link rel="stylesheet" type="text/css" th:href="@{/highchart/highcharts.css}"/>
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.min.css}"/>
+    <!-- Main -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+
+<body class="nav-md">
+<input id="report-topic-id" th:value="${topicId}" type="hidden">
+<div id="auth-before-load" style="text-align:center">
+    <img width="50px" th:src="@{/images/loading.gif}">
+    <div>Now Loading</div>
+</div>
+<div id="auth-after-load" class="container body">
+    <div class="main_container">
+        <!-- header -->
+        <div th:replace="header::header(topicList=${topicList})"></div>
+        <!-- /header -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <!-- top tiles -->
+            <div class="row tile_count">
+                <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Tổng đề cập</span>
+                    <div class="count"><i id="sum-mention"></i></div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-clock-o"></i> Tổng bài post</span>
+                    <div class="count"><i id="sum-post"></i></div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Tổng comment</span>
+                    <div class="count green"><i id="sum-commnet"></i></div>
+                </div>
+                <!--                <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">-->
+                <!--                    <span class="count_top"><i class="fa fa-user"></i> Total Females</span>-->
+                <!--                    <div class="count">4,567</div>-->
+                <!--                    <span class="count_bottom"><i class="red"><i-->
+                <!--                            class="fa fa-sort-desc"></i>12% </i> From last Week</span>-->
+                <!--                </div>-->
+            </div>
+            <!-- /top tiles -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard_graph">
+                        <div class="row x_title">
+                            <div class="col-md-6">
+                                <h3>Biến động đề cập
+                                    <small></small>
+                                </h3>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="reportrange" class="pull-right"
+                                     style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div id="chart_01" class="demo-placeholder">
+                                <!-- -->
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Biến động đề cập theo giờ</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="chart_02">
+                                <!-- -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Xếp hạng từ khóa</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="chart_03">
+                                <!-- -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Danh sách bài post</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="list-post">
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="report-facebook-scroll" id="report-list-post">
+                                        <ul class="list-unstyled timeline widget">
+                                            <!--Show danh sách bài viết-->
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <!-- Report template post-->
+                                    <div class="row" style="height:20px;" id="report-reaction-count">
+
+                                    </div>
+                                    <div class="row" id="report-reaction-post">
+
+                                    </div>
+                                    <div class="row" id="content-post">
+
+                                    </div>
+                                    <div class="row">
+                                        <button id="show-list-comment" class="btn btn-info">Show comment</button>
+                                        <a id="show-source-post"><i>Link post</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <div th:replace="footer::footer"></div>
+        <!-- /footer content -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-comment-post" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Danh sách bình luận</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="to_do" id="list-comment-by-post">
+                        <li>
+                            <p>
+                                <div class="" style="position: relative;">
+                                    <a href="#/external-link"><i class="fa fa-external-link"></i> fa-external-link</a>
+                                </div>
+                                Schedule meeting with new client
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Template bài viết -->
+<script id="list-template-post" type="text/x-custom-template">
+    <li data-url="{{url}}">
+        <div class="block">
+            <div class="block_content">
+                <h2 class="title">
+                    <a>{{title}}</a>
+                </h2>
+                <div class="byline">
+                    <span>{{date}}</span>
+                </div>
+                <p class="excerpt read-more">{{content}}</p>
+            </div>
+        </div>
+    </li>
+</script>
+<!-- /Template bài viết -->
+
+<!---->
+<script id="report-template-post" type="text/x-custom-template">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <strong>Like: </strong><span><i>{{likeCount}}</i></span>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <strong>Share: </strong><span><i>{{shareCount}}</i></span>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <strong>Comment: </strong><span><i>{{commentCount}}</i></span>
+    </div>
+</script>
+<!---->
+
+<!-- jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/js/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/js/nprogress.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/js/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/js/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/js/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/js/skycons.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/daterangepicker.js}"></script>
+<!-- High charts -->
+<script th:src="@{/highchart/highcharts.js}"></script>
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.js}"></script>
+
+<!-- Overview js -->
+<script th:src="@{/js/overview.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $(".show-user-name").append([[${username}]]);
+    })
+</script>
+</body>
+</html>

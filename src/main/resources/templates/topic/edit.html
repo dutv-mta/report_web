@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
+
+    <title>Web social facebook</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="application/x-font-ttf" th:href="@{/fonts/fontawesome-webfont.ttf}"/>
+    <link rel="stylesheet" type="application/font-woff" th:href="@{/fonts/fontawesome-webfont.woff}"/>
+    <!-- NProgress -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nprogress.css}"/>
+    <!-- iCheck -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/green.css}"/>
+
+    <!-- bootstrap-progressbar -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}"/>
+    <!-- JQVMap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jqvmap.min.css}"/>
+    <!-- bootstrap-daterangepicker -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}"/>
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.min.css}"/>
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- header -->
+        <div th:replace="header::header(topicList=${topicList})"></div>
+        <!-- /header -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Tạo topic mới
+                                    <small></small>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br>
+                                <h2 th:text="${message}"></h2>
+                                <br>
+                                <form th:action="@{/topic/update/{id}(id=${topic.id})}" th:object="${topic}" method="post" class="form-horizontal form-label-left">
+                                    <input name="id" th:field="*{id}" type="hidden" class="form-control" disabled>
+                                    <div class="control-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">Topic name</label>
+                                        <div class="col-md-6 col-sm-9 ">
+                                            <input th:field="*{name}" type="text" class="form-control" placeholder="Name topic">
+                                            <span class="col-md-12 col-sm-12 message-error"
+                                                  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                            <div style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group row">
+                                        <label class="control-label col-md-3 col-sm-3 ">Must word</label>
+                                        <div class="col-md-6 col-sm-9 ">
+                                            <input th:field="*{mustWord}" id="tags-must-word" type="text" class="tags form-control"
+                                                   value="social, adverts, sales"/>
+                                            <span class="col-md-12 col-sm-12 message-error"
+                                                  th:if="${#fields.hasErrors('mustWord')}"
+                                                  th:errors="*{mustWord}"></span>
+                                            <div id="must-word-container"
+                                                 style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group row">
+                                        <label class="control-label col-md-3 col-sm-3 ">Stop word</label>
+                                        <div class="col-md-6 col-sm-9 ">
+                                            <input th:field="*{stopWord}" id="tags-stop-word" type="text" class="tags form-control"
+                                                   value="social, adverts, sales"/>
+                                            <span class="col-md-12 col-sm-12 message-error"
+                                                  th:if="${#fields.hasErrors('stopWord')}"
+                                                  th:errors="*{stopWord}"></span>
+                                            <div id="stop-word-container"
+                                                 style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group row">
+                                        <label class="control-label col-md-3 col-sm-3 ">Create date</label>
+                                        <div class="col-md-6 col-sm-9 ">
+                                            <input th:field="*{createOn}" id="create-on" type="datetime-local" class="tags form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9  offset-md-3">
+                                            <a th:href="@{/topic}" type="button" class="btn btn-info">Danh sách
+                                                topic</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <div th:replace="footer::footer"></div>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/js/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/js/nprogress.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/js/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/js/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/js/icheck.min.js}"></script>
+<!-- jQuery Tags Input -->
+<script th:src="@{/js/jquery.tagsinput.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/js/skycons.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/daterangepicker.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.js}"></script>
+
+<!-- Topic.js -->
+<script th:src="@{/js/topic.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $(".show-user-name").append([[${username}]]);
+    })
+</script>
+</body>
+</html>

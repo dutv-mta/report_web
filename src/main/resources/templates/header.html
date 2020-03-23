@@ -1,0 +1,88 @@
+<header th:fragment="header(topicList)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+                <a th:href="@{/home}" class="site_title"><i class="fa fa-paw"></i> <span>Social facebook</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+                <div class="profile_pic">
+                    <img th:src="@{/images/user.png}" alt="..." class="img-circle profile_img">
+                </div>
+                <div class="profile_info">
+                    <span>Welcome,</span>
+                    <h2 class="show-user-name"></h2>
+                </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br/>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <ul class="nav side-menu">
+                        <li>
+                            <a th:href="@{/home}"><i class="fa fa-home"></i>Trang chủ</a>
+                        </li>
+                        <li><a><i class="fa fa-bar-chart"></i>Danh sách topic<span
+                                class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu" th:if="${#lists.isEmpty(topicList)}">
+                                <li><a href="#">No Topics Available</a></li>
+                            </ul>
+                            <ul class="nav child_menu" th:each="topic:${topicList}">
+                                <li><a><i th:text="${topic.name}"></i><span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a th:href="@{/report/overview/}+${topic.id}">Tổng quan</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/report/detail/}+${topic.id}">Chi tiết</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a th:href="@{/topic}"><i class="fa fa-pencil"></i>Quản lý topic</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /sidebar menu -->
+        </div>
+    </div>
+
+    <!-- top navigation -->
+    <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                    <li class="nav-item dropdown open" style="padding-left: 15px;">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                           id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <img th:src="@{/images/user.png}" alt=""><span class="show-user-name"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                            <a th:href="@{/user}" class="dropdown-item" href="javascript:;"> Profile</a>
+                            <a class="dropdown-item" href="javascript:;">Help</a>
+                            <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out pull-right"></i> Log
+                                Out</a>
+                        </div>
+                    </li>
+
+                    <li role="presentation" class="nav-item dropdown open">
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- /top navigation -->
+</header>

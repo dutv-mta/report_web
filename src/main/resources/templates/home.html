@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>Web social facebook</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="application/x-font-ttf" th:href="@{/fonts/fontawesome-webfont.ttf}"/>
+    <link rel="stylesheet" type="application/font-woff" th:href="@{/fonts/fontawesome-webfont.woff}"/>
+    <!-- NProgress -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nprogress.css}" />
+    <!-- iCheck -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/green.css}" />
+
+    <!-- bootstrap-progressbar -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}" />
+    <!-- JQVMap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jqvmap.min.css}" />
+    <!-- bootstrap-daterangepicker -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}" />
+
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.min.css}" />
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- header -->
+        <div th:replace="header::header(topicList=${topicList})"></div>
+        <!-- /header -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Trang chủ</h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel" style="height:600px;">
+                            <div class="x_title"></div>
+                            <div class="x_content">
+                            <!--    Content-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <div th:replace="footer::footer"></div>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/js/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/js/nprogress.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/js/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/js/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/js/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/js/skycons.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/daterangepicker.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $(".show-user-name").append([[${username}]]);
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+.report-facebook-scroll{
+    width: 100%;
+    height: 700px;
+    overflow: scroll;
+}
+
+.block_content{
+    padding: 10px;
+}
+
+.block_content:hover{
+    background: yellowgreen;
+    color: black;
+}
+
+.block_content .byline:hover{
+    color: #fff;
+}
+
+.block_content_last{
+    background: yellowgreen;
+    color: black;
+}
+
+.message-error{
+    color: red;
+}
+
+#auth-before-load {
+    display: none;
+    text-align: center;
+    margin-top: 18%;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+}
+
+#report-reaction-post{
+    height: 400px;
+}
+
+#content-post{
+    height: 235px;
+    overflow: scroll;
+}
+
+.read-more{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}

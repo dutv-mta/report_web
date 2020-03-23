@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
+
+    <title>Web social facebook</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome.min.css}"/>
+    <!-- NProgress -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nprogress.css}"/>
+    <!-- Animate.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}"/>
+
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.min.css}"/>
+</head>
+<body class="login">
+<div>
+    <div class="login_wrapper">
+        <div class="animate form">
+            <section class="login_content">
+                <form action="#" th:action="@{/user/register/insert}" th:object="${user}" method="post">
+                    <h1>Create Account</h1>
+                    <div>
+                        <input th:field="*{email}" type="email" class="form-control" placeholder="Email" required=""/>
+                    </div>
+                    <div>
+                        <input th:field="*{password}" type="password" class="form-control" placeholder="Password" required=""/>
+                    </div>
+                    <div>
+                        <input th:field="*{name}" type="text" class="form-control" placeholder="Username" required=""/>
+                    </div>
+                    <div>
+                        <input th:field="*{address}" type="text" class="form-control" placeholder="Address" required=""/>
+                    </div>
+                    <div>
+                        <input th:field="*{phone}" type="text" class="form-control" placeholder="Phone" required=""/>
+                    </div>
+                    <div>
+                        <button class="btn btn-default submit">Submit</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Already a member ?
+                            <a th:href="@{/login}" class="to_register"> Log in </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br/>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
